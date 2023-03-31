@@ -2,17 +2,19 @@ import matplotlib.pyplot as plt
 import imageio
 import numpy as np
 
-def create_frame(t, x, y, result, low, high, epoch):
+def create_frame(t, x, y, y_pred, low, high, epoch, out_file=None):
+    if out_file is None:
+        out_file = f'./img/img_{t}.png'
     fig = plt.figure(figsize=(6, 6))
     plt.axvspan(low, high, color='blue', alpha=0.3, label="Training Region")
     plt.scatter(x, y, color='grey', label=r"$y=x^2$")
-    plt.scatter(x, result, color='black', label=r"Neural Network")
+    plt.scatter(x, y_pred, color='black', label=r"Neural Network")
     plt.legend()  # loc="best")#outside lower left")
     plt.xlabel('x', fontsize=14)
     plt.ylabel('y', fontsize=14)
     plt.title(fr'Plot of $y = x^2$ vs network at epoch {epoch}',
               fontsize=14)
-    plt.savefig(f'./img/img_{t}.png',
+    plt.savefig(out_file,
                 transparent=False,
                 facecolor='white'
                 )

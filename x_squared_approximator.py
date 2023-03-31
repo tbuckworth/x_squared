@@ -112,7 +112,7 @@ class XSquaredApproximator(nn.Module):
                 self.results[epoch] = outputs.detach().numpy().squeeze()
                 self.test_loss.append(float(loss))
 
-            if epoch % 5 == 0 and epoch > 0:
+            if epoch % 100 == 0 and epoch > 0:
                 generate_results_gif(x_test, y_test, self.results, gif_info)
 
     def forward(self, batch_x):
